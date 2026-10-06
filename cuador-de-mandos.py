@@ -24,3 +24,15 @@ if hist_button:
     # 'use_container_width=True' ajusta el ancho del gráfico al contenedor
 
     st.plotly_chart(fig, use_container_width=True)
+
+scatter_button = st.button('Construir Scatter plot')
+
+if scatter_button:
+    st.write(
+        'Creación de un Scatter plot / dispercion para conjunto de datos de anuncios de venta de coches')
+
+    fig2 = go.Figure(
+        data=[go.Scatter(x=car_data['odometer'], y=car_data['price'], mode='markers')])
+    fig2.update_layout(title_text='Relación entre Odómetro y Precio')
+
+    st.plotly_chart(fig2, use_container_width=True)
