@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-st.title('Graficas de distacnia recorrida por vehiculos / Odometro')
+st.title('Graficas de distancia recorrida por vehiculos / Odometro & Precios por vehiculos')
 
 car_data = pd.read_csv('vehicles_us.csv')
 
