@@ -34,7 +34,8 @@ if hist_button:
     fig = go.Figure(data=[go.Histogram(x=car_data['odometer'])])
 
     # Opcional: Puedes añadir un título al gráfico si lo deseas
-    fig.update_layout(title_text='Distribución del Odómetro')
+    fig.update_layout(title_text='Distribución del Odómetro',
+                      xaxis_title='Odomter values', yaxis_title='Frequency')
 
     # Mostrar el gráfico Plotly interactivo en la aplicación Streamlit
     # 'use_container_width=True' ajusta el ancho del gráfico al contenedor
@@ -49,6 +50,13 @@ if scatter_button:
 
     fig2 = go.Figure(
         data=[go.Scatter(x=car_data['odometer'], y=car_data['price'], mode='markers')])
-    fig2.update_layout(title_text='Relación entre Odómetro y Precio')
+    fig2.update_layout(title_text='Relación entre Odómetro y Precio',
+                       xaxis_title='odometer value', yaxis_title='price')
 
     st.plotly_chart(fig2, use_container_width=True)
+
+build_table2 = st.checkbox('tabla de 5 odelos mas costosos')
+
+if build_table2:
+    st.dataframe(car_data.groupby('model')[
+                 'price'].mean().sort_values(ascending=False).head())
