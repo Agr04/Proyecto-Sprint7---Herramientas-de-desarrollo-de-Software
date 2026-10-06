@@ -8,6 +8,25 @@ car_data = pd.read_csv('vehicles_us.csv')
 
 hist_button = st.button('Construir histograma')
 
+build_histogram = st.checkbox('Contruir histograma')
+
+if build_histogram:
+    st.write('Contruir histograma para columna de ODOMETRO')
+
+    # Crear histograma utilizando plotly.graph objects
+    # Se crea figura vacia y luego rastro del histoframa
+
+    fig = go.Figure(data=[go.Histogram(x=car_data['odometer'])])
+
+    # Opcional: Puedes añadir un título al gráfico si lo deseas
+    fig.update_layout(title_text='Distribución del Odómetro')
+
+    # Mostrar el gráfico Plotly interactivo en la aplicación Streamlit
+    # 'use_container_width=True' ajusta el ancho del gráfico al contenedor
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
 if hist_button:
     st.write(
         'Creación de un histograma para conjunto de datos de anuncios de venta de coches')
