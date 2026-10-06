@@ -2,29 +2,26 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+st.title('Graficas de distacnia recorrida por vehiculos / Odometro')
+
 car_data = pd.read_csv('vehicles_us.csv')
 
 # Crear botonde historial
 
 hist_button = st.button('Construir histograma')
 
-build_histogram = st.checkbox('Contruir histograma')
+build_table = st.checkbox('Mostrar promedio de kilometraje en top 5 Modelos')
 
-if build_histogram:
-    st.write('Contruir histograma para columna de ODOMETRO')
+if build_table:
+    st.write('Kilometraje promedio para Top 5 modelos')
 
-    # Crear histograma utilizando plotly.graph objects
-    # Se crea figura vacia y luego rastro del histoframa
+    lista_modelos = car_data['model'].value_counts().head()
+    modelos = lista_modelos.index
 
-    fig = go.Figure(data=[go.Histogram(x=car_data['odometer'])])
+    odometer_mean = car_data.groupby('model')['odometer'].mean()
+    odometer_meanT5 = odometer_mean.loc[modelos]
 
-    # Opcional: Puedes añadir un título al gráfico si lo deseas
-    fig.update_layout(title_text='Distribución del Odómetro')
-
-    # Mostrar el gráfico Plotly interactivo en la aplicación Streamlit
-    # 'use_container_width=True' ajusta el ancho del gráfico al contenedor
-
-    st.plotly_chart(fig, use_container_width=True)
+    st.dataframe(odometer_meanT5)
 
 
 if hist_button:
