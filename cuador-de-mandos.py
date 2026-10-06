@@ -55,7 +55,7 @@ if scatter_button:
 
     st.plotly_chart(fig2, use_container_width=True)
 
-build_table2 = st.checkbox('tabla de 5 odelos mas costosos')
+build_table2 = st.checkbox('tabla de 5 modelos mas costosos')
 
 if build_table2:
     st.dataframe(car_data.groupby('model')[
